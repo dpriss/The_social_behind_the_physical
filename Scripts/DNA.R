@@ -54,62 +54,6 @@ destroyX = function(es) {
 # [29] KernSmooth_2.23-20   proxy_0.4-27         statnet.common_4.7.0
 
 # Import data ----
-## manual networks
-edgelist_EBA1 <- read_xlsx("edgelists_manual_new.xlsx", sheet = "EBA1")
-edgelist_IA2 <- read_xlsx("edgelists_manual_new.xlsx", sheet = "IA2")
-edgelist_EBA2 <- read_xlsx("edgelists_manual_new.xlsx", sheet = "EBA2")
-edgelist_IA1 <- read_xlsx("edgelists_manual_new.xlsx", sheet = "IA1")
-edgelist_LBA <- read_xlsx("edgelists_manual_new.xlsx", sheet = "LBA")
-edgelist_MBA <- read_xlsx("edgelists_manual_new.xlsx", sheet = "MBA")
-
-sites_EBA1 <- read.csv("EBA1_sites_id_log.csv")
-sites_IA2 <- read.csv("IA2_sites_id_log.csv")
-sites_EBA2 <- read.csv("EBA2_sites_id_log.csv")
-sites_IA1 <- read.csv("IA1_sites_id_log.csv")
-sites_LBA <- read.csv("LBA_sites_id_log.csv")
-sites_MBA <- read.csv("MBA_sites_id_log.csv")
-
-## computational networks
-edgelist_EBA1 <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "EBA1")
-edgelist_IA2 <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "IA2")
-edgelist_EBA2 <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "EBA2")
-edgelist_IA1 <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "IA1")
-edgelist_LBA <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "LBA")
-edgelist_MBA <- read_xlsx("edgelists_comp_5500_new.xlsx", sheet = "MBA")
-
-sites_EBA1 <- read.csv("EBA1_sites_5500_id.csv")
-sites_EBA1 = sites_EBA1[!duplicated(sites_EBA1$id),]
-sites_IA2 <- read.csv("IA2_sites_5500_id.csv")
-sites_IA2 = sites_IA2[!duplicated(sites_IA2$id),]
-sites_EBA2 <- read.csv("EBA2_sites_5500_id.csv")
-sites_EBA2 = sites_EBA2[!duplicated(sites_EBA2$id),]
-sites_IA1 <- read.csv("IA1_sites_5500_id.csv")
-sites_IA1 = sites_IA1[!duplicated(sites_IA1$id),]
-sites_LBA <- read.csv("LBA_sites_5500_id.csv")
-sites_LBA = sites_LBA[!duplicated(sites_LBA$id),]
-sites_MBA <- read.csv("MBA_sites_5500_id.csv")
-sites_MBA = sites_MBA[!duplicated(sites_MBA$id),]
-
-edgelist_EBA1 <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "EBA1")
-edgelist_IA2 <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "IA2")
-edgelist_EBA2 <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "EBA2")
-edgelist_IA1 <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "IA1")
-edgelist_LBA <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "LBA")
-edgelist_MBA <- read_xlsx("edgelists_comp_3000_new.xlsx", sheet = "MBA")
-
-sites_EBA1 <- read.csv("sites_EBA1_node_comp_3000.csv")
-sites_EBA1 = sites_EBA1[!duplicated(sites_EBA1$id),]
-sites_IA2 <- read.csv("sites_IA2_node_comp_3000.csv")
-sites_IA2 = sites_IA2[!duplicated(sites_IA2$id),]
-sites_EBA2 <- read.csv("sites_EBA2_node_comp_3000.csv")
-sites_EBA2 = sites_EBA2[!duplicated(sites_EBA2$id),]
-sites_IA1 <- read.csv("sites_IA1_node_comp_3000.csv")
-sites_IA1 = sites_IA1[!duplicated(sites_IA1$id),]
-sites_LBA <- read.csv("sites_LBA_node_comp_3000.csv")
-sites_LBA = sites_LBA[!duplicated(sites_LBA$id),]
-sites_MBA <- read.csv("sites_MBA_node_comp_3000.csv")
-sites_MBA = sites_MBA[!duplicated(sites_MBA$id),]
-
 ## hybrid network
 edgelist_EBA1 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "EBA1")
 edgelist_IA2 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "IA2")
@@ -124,8 +68,6 @@ sites_EBA2 <- read.csv("sites_EBA2_hybrid.csv")
 sites_IA1 <- read.csv("sites_IA1_hybrid.csv")
 sites_LBA <- read.csv("sites_LBA_hybrid.csv")
 sites_MBA <- read.csv("sites_MBA_hybrid.csv")
-
-
 
 # Descriptives ----
 ## degree metrics
