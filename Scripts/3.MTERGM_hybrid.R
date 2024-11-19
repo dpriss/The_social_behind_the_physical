@@ -446,7 +446,7 @@ plot(mtergm.null_gof, plotlogodds = T)
 mcmc.diagnostics(mtergm.null)
 
 # Fitted Models
-## Simple MTERGM without temporal dependencies (Model 1)
+## Simple MTERGM without temporal dependencies 
 mtergm <- mtergm(survey_waves ~ edges + gwesp(decay = 0.9, fixed = T) + nodecov("Size") + absdiff("Size") + smalldiff("Size", cutoff = 5) + edgecov(DistMat) + edgecov(absdiff_Dist) + edgecov(smalldiff_Dist))
 summary(mtergm)
 mtergm.2_gof <- gof(mtergm.2)
