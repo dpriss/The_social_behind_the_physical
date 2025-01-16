@@ -26,30 +26,6 @@ destroyX = function(es) {
   assign(deparse(substitute(es)), f, inherits = TRUE) #assign corrected data to original name
 }
 
-# 
-# R version 4.1.0 (2021-05-18)
-# Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19045)
-# 
-# Matrix products: default
-# 
-# locale:
-#   [1] LC_COLLATE=German_Germany.1252  LC_CTYPE=German_Germany.1252    LC_MONETARY=German_Germany.1252 LC_NUMERIC=C                   
-# [5] LC_TIME=German_Germany.1252    
-# 
-# attached base packages:
-#   [1] stats     graphics  grDevices utils     datasets  methods   base     
-# 
-# other attached packages:
-#   [1] network_1.18.0    xts_0.12.2        zoo_1.8-11        purrr_0.3.4       R.utils_2.12.2    R.oo_1.25.0       R.methodsS3_1.8.2 sf_1.0-7         
-# [9] dplyr_1.0.9       igraph_1.3.5     
-# 
-# loaded via a namespace (and not attached):
-#   [1] Rcpp_1.0.10          pillar_1.9.0         compiler_4.1.0       class_7.3-19         tools_4.1.0          lifecycle_1.0.3      tibble_3.1.7        
-# [8] lattice_0.20-44      pkgconfig_2.0.3      rlang_1.0.6          DBI_1.1.3            cli_3.4.1            rstudioapi_0.14      coda_0.19-4         
-# [15] e1071_1.7-13         generics_0.1.3       vctrs_0.5.2          classInt_0.4-7       grid_4.1.0           tidyselect_1.2.0     glue_1.6.2          
-# [22] R6_2.5.1             fansi_1.0.3          magrittr_2.0.3       ellipsis_0.3.2       units_0.8-0          assertthat_0.2.1     utf8_1.2.2          
-# [29] KernSmooth_2.23-20   proxy_0.4-27         statnet.common_4.7.0
 
 # Import data ----
 edgelist_EBA1 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "EBA1")
@@ -942,5 +918,25 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
 plot.igraph(TBS, rescale = F, layout = lo4, vertex.color=cols[as.character(degree(TBS))], vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.size = log(vertex_attr(TBS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
+# Descriptives ----
+# The following code can be used to explore descriptive network metrics. 
+# Please note that “ig” changes every time a new period graph is created, so the metrics should be calculated after creating the graph of interest. 
 
+## degree metrics
+deg <- degree(ig)
+hist(deg, main = "Histogram of node degree")
+mean(deg)   
+table(deg)   #table of degree frequency
+deg.dist <- degree_distribution(ig, cumulative = T, mode="all")
+plot(x = 0:max(deg), y = 1 - deg.dist, pch = 19, cex = 1.2, col = "orange", xlab  ="Degree", ylab = "Cumulative Frequency")
+
+## centrality metrics
+centr_degree(ig, mode = "all", normalized = T)
+centr_betw(ig, directed = F, normalized = T)
+max(harmonic_centrality(ig, normalized = T, mode = "all"))
+mean(harmonic_centrality(ig, normalized = T, mode = "all"))
+
+## other metrics
+edge_density(ig, loops=F)
+length(cluster_edge_betweenness(ig)) # number of communities
 
