@@ -14,40 +14,6 @@ library(intergraph)
 library(purrr)
 library(texreg)
 
-# R version 4.1.0 (2021-05-18)
-# Platform: x86_64-w64-mingw32/x64 (64-bit)
-# Running under: Windows 10 x64 (build 19045)
-# 
-# Matrix products: default
-# 
-# locale:
-#   [1] LC_COLLATE=German_Germany.1252  LC_CTYPE=German_Germany.1252    LC_MONETARY=German_Germany.1252
-# [4] LC_NUMERIC=C                    LC_TIME=German_Germany.1252    
-# 
-# attached base packages:
-#   [1] stats     graphics  grDevices utils     datasets  methods   base     
-# 
-# other attached packages:
-#   [1] openxlsx_4.2.5     viridis_0.6.2      viridisLite_0.4.1  cowplot_1.1.1      arsenal_3.6.3      ggplot2_3.4.0     
-# [7] RColorBrewer_1.1-3 readxl_1.4.1       network_1.18.0     xts_0.12.2         zoo_1.8-11         purrr_0.3.4       
-# [13] R.utils_2.12.2     R.oo_1.25.0        R.methodsS3_1.8.2  sf_1.0-7           dplyr_1.0.9        plyr_1.8.7        
-# [19] igraph_1.3.5      
-# 
-# loaded via a namespace (and not attached):
-#   [1] Rdpack_2.4              assertthat_0.2.1        cellranger_1.1.0        yaml_2.3.5              robustbase_0.95-0      
-# [6] pillar_1.9.0            lattice_0.20-44         glue_1.6.2              digest_0.6.29           rbibutils_2.2.13       
-# [11] colorspace_2.0-3        htmltools_0.5.2         Matrix_1.4-1            pkgconfig_2.0.3         ergm_4.4.0             
-# [16] scales_1.2.1            intergraph_2.0-2        tibble_3.1.7            proxy_0.4-27            generics_0.1.3         
-# [21] ellipsis_0.3.2          withr_2.5.0             cachem_1.0.6            cli_3.4.1               magrittr_2.0.3         
-# [26] statnet.common_4.8.0    memoise_2.0.1           evaluate_0.21           fansi_1.0.3             MASS_7.3-54            
-# [31] class_7.3-19            tools_4.1.0             lifecycle_1.0.3         munsell_0.5.0           trust_0.1-8            
-# [36] zip_2.2.1               compiler_4.1.0          e1071_1.7-13            rlang_1.0.6             classInt_0.4-7         
-# [41] units_0.8-0             grid_4.1.0              rstudioapi_0.14         rmarkdown_2.17          gtable_0.3.1           
-# [46] DBI_1.1.3               R6_2.5.1                gridExtra_2.3           lpSolveAPI_5.5.2.0-17.8 rle_0.9.2              
-# [51] knitr_1.42              fastmap_1.1.0           utf8_1.2.2              KernSmooth_2.23-20      stringi_1.7.12         
-# [56] parallel_4.1.0          Rcpp_1.0.10             vctrs_0.5.2             DEoptimR_1.0-13         tidyselect_1.2.0       
-# [61] xfun_0.39               coda_0.19-4 
-
 #function to remove the X from the column names of imported .csv files
 destroyX = function(es) {
   f = es
@@ -65,7 +31,7 @@ destroyX = function(es) {
 #Data import----
 # EDGELISTS 
 # define source file for edgelists 
-path <- "edgelists_hybrid.xlsx"
+path <- "Data/edgelists_hybrid.xlsx"
 
 # import sheets into list
 sheets <- path %>% 
@@ -89,13 +55,13 @@ names(edgelists) <- list("EBA1", "EBA2", "MBA", "LBA", "IA1", "IA2")
 
 #ATTRIBUTES
 # find the attribute files for the periods
-all_attr <- list.files(pattern = "sites_\\w+_hybrid.csv", full.names = TRUE)
+all_attr <- list.files(pattern = "Data/sites_\\w+_hybrid.csv", full.names = TRUE)
 
 # read csv into list 
 list_all_attr <- lapply(all_attr, read.csv)
 
 # set the names of the files 
-names(list_all_attr) <- gsub(".csv", "", gsub("_hybrid", "", list.files(pattern = "sites_\\w+_hybrid.csv", full.names = F)))
+names(list_all_attr) <- gsub(".csv", "", gsub("_hybrid", "", list.files(pattern = "Data/sites_\\w+_hybrid.csv", full.names = F)))
 
 # create new ID column to match the edgelists
 list_all_attr <- 
@@ -152,13 +118,13 @@ list_nw <- list(nw_EBA1, nw_EBA2, nw_MBA, nw_LBA, nw_IA1, nw_IA2)
 
 #DISTANCE MATRICES
 # period-specific distance matrices, i.e. subset to the nodes in the respective period. Used for ERGMs because a distance matrix for all nodes would lead to wrong assignments of distances.
-DistMats_periods <- list.files(pattern = "\\w+_DistMat_hybrid.csv$", full.names = TRUE)
+DistMats_periods <- list.files(pattern = "Data/\\w+_DistMat_hybrid.csv$", full.names = TRUE)
 # create list of csv
 list_DistMats <- lapply(DistMats_periods, read.csv, row.names = 1)
 # row and column names are imported with an X because they are numbers. This function removes them.
 list_DistMats <- lapply(list_DistMats, destroyX)
 # add names to the csvs
-names(list_DistMats) <- gsub("_hybrid.csv", "", list.files(pattern = "\\w+_DistMat_hybrid.csv$", full.names = F))
+names(list_DistMats) <- gsub("_hybrid.csv", "", list.files(pattern = "Data/\\w+_DistMat_hybrid.csv$", full.names = F))
 # add to environment as matrices
 list2env(lapply(list_DistMats, as.matrix),envir = .GlobalEnv)
 
