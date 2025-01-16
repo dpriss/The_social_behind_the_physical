@@ -28,63 +28,20 @@ destroyX = function(es) {
 
 
 # Import data ----
-edgelist_EBA1 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "EBA1")
-edgelist_IA2 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "IA2")
-edgelist_EBA2 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "EBA2")
-edgelist_IA1 <- read_xlsx("edgelists_hybrid.xlsx", sheet = "IA1")
-edgelist_LBA <- read_xlsx("edgelists_hybrid.xlsx", sheet = "LBA")
-edgelist_MBA <- read_xlsx("edgelists_hybrid.xlsx", sheet = "MBA")
+edgelist_EBA1 <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "EBA1")
+edgelist_IA2 <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "IA2")
+edgelist_EBA2 <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "EBA2")
+edgelist_IA1 <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "IA1")
+edgelist_LBA <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "LBA")
+edgelist_MBA <- read_xlsx("Data/edgelists_hybrid.xlsx", sheet = "MBA")
 
-sites_EBA1 <- read.csv("sites_EBA1_hybrid.csv")
-sites_IA2 <- read.csv("sites_IA2_hybrid.csv")
-sites_EBA2 <- read.csv("sites_EBA2_hybrid.csv")
-sites_IA1 <- read.csv("sites_IA1_hybrid.csv")
-sites_LBA <- read.csv("sites_LBA_hybrid.csv")
-sites_MBA <- read.csv("sites_MBA_hybrid.csv")
+sites_EBA1 <- read.csv("Data/sites_EBA1_hybrid.csv")
+sites_IA2 <- read.csv("Data/sites_IA2_hybrid.csv")
+sites_EBA2 <- read.csv("Data/sites_EBA2_hybrid.csv")
+sites_IA1 <- read.csv("Data/sites_IA1_hybrid.csv")
+sites_LBA <- read.csv("Data/sites_LBA_hybrid.csv")
+sites_MBA <- read.csv("Data/sites_MBA_hybrid.csv")
 
-
-
-# Descriptives ----
-## degree metrics
-deg <- degree(ig)
-hist(deg, main = "Histogram of node degree")
-mean(deg)   
-table(deg)   #table of degree frequency
-deg.dist <- degree_distribution(ig, cumulative = T, mode="all")
-plot(x = 0:max(deg), y = 1 - deg.dist, pch = 19, cex = 1.2, col = "orange", xlab  ="Degree", ylab = "Cumulative Frequency")
-
-## centrality metrics
-centr_degree(ig, mode = "all", normalized = T)
-centr_betw(ig, directed = F, normalized = T)
-max(harmonic_centrality(ig, normalized = T, mode = "all"))
-mean(harmonic_centrality(ig, normalized = T, mode = "all"))
-
-## other metrics
-edge_density(ig, loops=F)
-length(cluster_edge_betweenness(ig)) # number of communities
-
-
-transitivity(ig, type="global") 
-diameter(ig, directed = F, weights = NA) #longest shortest path between two nodes
-#diam <- get_diameter(g, directed = F) #nodes along the diameter
-mean_distance(ig, directed = F)
-largest_cliques(ig)
-modularity(cluster_edge_betweenness(ig))
-
-## node level metrics
-hub_score(g, weights = NA)$vector
-authority_score(g, weights = NA)$vector
-transitivity(g, type="local")
-betweenness(g, directed = F, weights = NA)
-edge_betweenness(g, directed = F, weights = NA)
-closeness(g, mode = "all", weights = NA)
-distances(g)
-cliques(g)
-sapply(cliques(g), length) # clique sizes
-cluster_edge_betweenness(g)
-clp <- cluster_label_prop(g)
-plot(clp, g)
-coreness(g, mode = "all")
 
 # The following code was used to create the network graphs in Figure 3. We also provide the code for additional plots to help the reader with an initial overview of the data.
 
