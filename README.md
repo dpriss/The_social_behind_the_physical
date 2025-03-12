@@ -3,13 +3,12 @@ This repository contains the data and scripts used for the analysis presented in
 
 # Content
 The repository contains one folder with Data, one with Plots and one with Scripts. 
-
-  * Data: Input for the scripts
   
   * Plots: Plots of network graphs and gof grpahs created in the script "3. MTERGM_hybrid.R"
   
-  * Scripts: 
-    + 1.DNA.R - Script for a descriptive network analysis of the networks. This scirpt is meant to help the reader get accustomed with the data. 
+  * Data & Scripts:
+    + Input data for the scripts
+    + 1.DNA.R - Script for a descriptive network analysis of the networks. This scirpt is meant to help the reader get accustomed with the data.
     + 2.ERGM_periods_hybrid.R - Script to implement ERGMs for the individual time periods (waves) analysed in the paper.
     + 3.MTERGM_hybrid.R - Script to implement the MTERGM. 
 
@@ -121,7 +120,7 @@ For the Scripts, the following software was used:
 
 # How to use 
 
-We advise to work throught the script 1.DNA.R first as it provides the code for an exploratory analysis. We first import the files which can found in the Data folder before calculating selected network metrics. Those metrics are not mentioned in the paper but instead should just help the reader to understand the networks. We then proceed by creating some plots of the networks with different metrics such as degree and site size to compare and visuslise them. The basic plots of the networks are presented in Figure 3 while the other plots again just serve as a means of orientation. 
+We advise to work throught the script 1.DNA.R first as it provides the code for an exploratory analysis. We first import the data files which can found in the Data & Scripts folder before creating some plots of the networks with different metrics such as degree and site size to compare and visuslise them. The basic plots of the networks are presented in Figure 3 while the other plots just serve as a means of orientation. We then proceed by calculating selected network metrics. Those metrics are not mentioned in the paper but instead should just help the reader to understand the networks.  
 
 The other two scripts can be run in any order, depending on the reader's preferences. The script 2.ERGM_periods_hybrid.R contains the code for the ERGMs for the cross-sectional networks, i.e. for the six periods. Every network is analysed independently. We present the results of the models and the gof plots in the SI of the paper (Table 1 and Figure 5 - 10) because those models are just additional information for the interested reader and are not explained in detail in the paper itself. They were added on a reviewer's request and we think that they supplement the paper very well.
 
