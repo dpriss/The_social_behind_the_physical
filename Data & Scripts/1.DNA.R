@@ -160,7 +160,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -230,31 +230,31 @@ lo5 <- layout.norm(as.matrix(vert.attr_IA2[, c("POINT_X", "POINT_Y")]))
 ## create plots with different metrics ----
 
 ## plot with color = survey and size = degree centrality 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = degree(ig)/3, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig5, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = degree(ig5)/3, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 ##asp sets the aspect ratio, i.e. displays the plot in the correct dimensions
 
 ## plot with color = survey and size = betweeness centrality
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = betweenness(ig)*0.4, vertex.label.cex = 1, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig5, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = betweenness(ig5)*0.4, vertex.label.cex = 1, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 ## plot with color = survey and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = log(vert.attr_IA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig5, layout = lo, rescale = F, vertex.label = vert.attr_IA2$Site_Nm, vertex.size = log(vert.attr_IA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 # create color map for degree
-d = degree(ig)
+d = degree(ig5)
 cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(unique(d)))
 
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig))], vertex.label = vert.attr_IA2$Site_Nm, vertex.size = log(vert.attr_IA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig5, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig5))], vertex.label = vert.attr_IA2$Site_Nm, vertex.size = log(vert.attr_IA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 
 # Surveys IA2 ----
 ## LLN survey ----
-THS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "THS"))
+THS <- induced.subgraph(ig5, which(V(ig5)$Datst_1 == "THS"))
 vert.attr_THS <- as.data.frame(vertex_attr(THS))
 lo2 <- layout.norm(as.matrix(vert.attr_THS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(THS, layout = lo2, vertex.label = vertex_attr(THS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -277,7 +277,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(THS, layout = lo2, rescale = F, vertex.color=cols[as.character(degree(THS))], vertex.label = vertex_attr(THS, "Site_Nm"), vertex.size = log(vertex_attr(THS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## NJS survey----
-NJS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "NJS"))
+NJS <- induced.subgraph(ig5, which(V(ig5)$Datst_1 == "NJS"))
 vert.attr_NJS <- as.data.frame(vertex_attr(NJS))
 lo3 <- layout.norm(as.matrix(vert.attr_NJS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(NJS, layout = lo3, vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -300,7 +300,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, rescale = F, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.15), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig5, which(V(ig5)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -341,7 +341,7 @@ ig1 <- igraph::simplify(ig1)
 ## define layout to display the nodes with their real-world coordinates
 lo1 <- layout.norm(as.matrix(vert.attr_EBA2[, c("POINT_X", "POINT_Y")]))
 
-nw_EBA2 <- intergraph::asNetwork(ig)
+nw_EBA2 <- intergraph::asNetwork(ig1)
 
 ## plot network----
 plot(nw_EBA2,
@@ -360,38 +360,38 @@ col$color <- c("yellow","darkred", "darkgreen", "orange", "blue")
 vert.attr_EBA2$color <- col$color[match(vert.attr_EBA2$Datst_1, col$Datst_1)]
 
 ## create and plot igraph with spatial distribution----
-ig <- graph_from_data_frame(edgelist_EBA2, directed = FALSE, vertices = vert.attr_EBA2)
-ig  <- igraph::simplify(ig)
+ig1 <- graph_from_data_frame(edgelist_EBA2, directed = FALSE, vertices = vert.attr_EBA2)
+ig1  <- igraph::simplify(ig1)
 lo <- layout.norm(as.matrix(vert.attr_EBA2[, c("POINT_X", "POINT_Y")]))
 
 ## create plots with different metrics ----
 
 ## plot with color = survey and size = degree centrality 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = degree(ig)/2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig1, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = degree(ig1)/2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 ##asp sets the aspect ratio, i.e. displays the plot in the correct dimensions
 
 ## plot with color = survey and size = betweeness centrality
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = betweenness(ig)/10, vertex.label.cex = 1, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig1, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = betweenness(ig1)/10, vertex.label.cex = 1, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 ## plot with color = survey and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = log(vert.attr_EBA2$Size + 1, 2), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig1, layout = lo, rescale = F, vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = log(vert.attr_EBA2$Size + 1, 2), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 # create color map for degree
-d = degree(ig)
+d = degree(ig1)
 cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(unique(d)))
 
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig))], vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = log(vert.attr_EBA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig1, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig1))], vertex.label = vert.attr_EBA2$Site_Nm, vertex.size = log(vert.attr_EBA2$Size + 1, 1.5), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 
 # Surveys EBA2 ----
 ## LLN survey ----
-THS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "THS"))
+THS <- induced.subgraph(ig1, which(V(ig1)$Datst_1 == "THS"))
 vert.attr_THS <- as.data.frame(vertex_attr(THS))
 lo2 <- layout.norm(as.matrix(vert.attr_THS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(THS, layout = lo2, vertex.label = vertex_attr(THS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -414,7 +414,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(THS, layout = lo2, rescale = F, vertex.color=cols[as.character(degree(THS))], vertex.label = vertex_attr(THS, "Site_Nm"), vertex.size = log(vertex_attr(THS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## NJS survey----
-NJS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "NJS"))
+NJS <- induced.subgraph(ig1, which(V(ig1)$Datst_1 == "NJS"))
 vert.attr_NJS <- as.data.frame(vertex_attr(NJS))
 lo3 <- layout.norm(as.matrix(vert.attr_NJS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(NJS, layout = lo3, vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -437,7 +437,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, rescale = F, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.15), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig1, which(V(ig1)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -479,7 +479,7 @@ ig2 <- igraph::simplify(ig2)
 ## define layout to display the nodes with their real-world coordinates
 lo2 <- layout.norm(as.matrix(vert.attr_MBA[, c("POINT_X", "POINT_Y")]))
 
-nw_MBA <- intergraph::asNetwork(ig)
+nw_MBA <- intergraph::asNetwork(ig2)
 
 
 ## plot network----
@@ -499,38 +499,38 @@ col$color <- c("yellow","darkred", "darkgreen", "orange", "blue")
 vert.attr_MBA$color <- col$color[match(vert.attr_MBA$Datst_1, col$Datst_1)]
 
 ## create and plot igraph with spatial distribution----
-ig <- graph_from_data_frame(edgelist_MBA, directed = FALSE, vertices = vert.attr_MBA)
-ig <- igraph::simplify(ig)
+ig2 <- graph_from_data_frame(edgelist_MBA, directed = FALSE, vertices = vert.attr_MBA)
+ig2 <- igraph::simplify(ig2)
 lo <- layout.norm(as.matrix(vert.attr_MBA[, c("POINT_X", "POINT_Y")]))
 
 ## create plots with different metrics ----
 
 ## plot with color = survey and size = degree centrality 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(degree(ig))*1.5, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig2, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(degree(ig2))*1.5, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 ##asp sets the aspect ratio, i.e. displays the plot in the correct dimensions
 
 ## plot with color = survey and size = betweeness centrality
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = betweenness(ig)*0.4, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig2, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = betweenness(ig2)*0.4, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 ## plot with color = survey and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(vert.attr_MBA$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig2, layout = lo, rescale = F, vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(vert.attr_MBA$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 # create color map for degree
-d = degree(ig)
+d = degree(ig2)
 cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(unique(d)))
 
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig))], vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(vert.attr_MBA$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig2, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig2))], vertex.label = vert.attr_MBA$Site_Nm, vertex.size = log(vert.attr_MBA$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 
 # Surveys MBA ----
 ## LLN survey ----
-THS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "THS"))
+THS <- induced.subgraph(ig2, which(V(ig2)$Datst_1 == "THS"))
 vert.attr_THS <- as.data.frame(vertex_attr(THS))
 lo2 <- layout.norm(as.matrix(vert.attr_THS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(THS, layout = lo2, vertex.label = vertex_attr(THS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -553,7 +553,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(THS, layout = lo2, rescale = F, vertex.color=cols[as.character(degree(THS))], vertex.label = vertex_attr(THS, "Site_Nm"), vertex.size = log(vertex_attr(THS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## NJS survey----
-NJS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "NJS"))
+NJS <- induced.subgraph(ig2, which(V(ig2)$Datst_1 == "NJS"))
 vert.attr_NJS <- as.data.frame(vertex_attr(NJS))
 lo3 <- layout.norm(as.matrix(vert.attr_NJS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(NJS, layout = lo3, vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -576,7 +576,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, rescale = F, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.15), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig2, which(V(ig2)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -617,7 +617,7 @@ ig3 <- igraph::simplify(ig3)
 ## define layout to display the nodes with their real-world coordinates
 lo3 <- layout.norm(as.matrix(vert.attr_LBA[, c("POINT_X", "POINT_Y")]))
 
-nw_LBA <- intergraph::asNetwork(ig)
+nw_LBA <- intergraph::asNetwork(ig3)
 
 
 ## plot network----
@@ -637,38 +637,38 @@ col$color <- c("yellow","darkred", "darkgreen", "orange", "blue")
 vert.attr_LBA$color <- col$color[match(vert.attr_LBA$Datst_1, col$Datst_1)]
 
 ## create and plot igraph with spatial distribution----
-ig <- graph_from_data_frame(edgelist_LBA, directed = FALSE, vertices = vert.attr_LBA)
-ig <- igraph::simplify(ig)
+ig3 <- graph_from_data_frame(edgelist_LBA, directed = FALSE, vertices = vert.attr_LBA)
+ig3 <- igraph::simplify(ig3)
 lo <- layout.norm(as.matrix(vert.attr_LBA[, c("POINT_X", "POINT_Y")]))
 
 ## create plots with different metrics ----
 
 ## plot with color = survey and size = degree centrality 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = degree(ig)/2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig3, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = degree(ig3)/2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 ##asp sets the aspect ratio, i.e. displays the plot in the correct dimensions
 
 ## plot with color = survey and size = betweeness centrality
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = betweenness(ig)*1.2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig3, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = betweenness(ig3)*1.2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 ## plot with color = survey and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = log(vert.attr_LBA$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig3, layout = lo, rescale = F, vertex.label = vert.attr_LBA$Site_Nm, vertex.size = log(vert.attr_LBA$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 # create color map for degree
-d = degree(ig)
+d = degree(ig3)
 cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(unique(d)))
 
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig))], vertex.label = vert.attr_LBA$Site_Nm, vertex.size = log(vert.attr_LBA$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig3, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig3))], vertex.label = vert.attr_LBA$Site_Nm, vertex.size = log(vert.attr_LBA$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 
 # Surveys LBA ----
 ## LLN survey ----
-THS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "THS"))
+THS <- induced.subgraph(ig3, which(V(ig3)$Datst_1 == "THS"))
 vert.attr_THS <- as.data.frame(vertex_attr(THS))
 lo2 <- layout.norm(as.matrix(vert.attr_THS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(THS, layout = lo2, vertex.label = vertex_attr(THS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -691,7 +691,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(THS, layout = lo2, rescale = F, vertex.color=cols[as.character(degree(THS))], vertex.label = vertex_attr(THS, "Site_Nm"), vertex.size = log(vertex_attr(THS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## NJS survey----
-NJS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "NJS"))
+NJS <- induced.subgraph(ig3, which(V(ig3)$Datst_1 == "NJS"))
 vert.attr_NJS <- as.data.frame(vertex_attr(NJS))
 lo3 <- layout.norm(as.matrix(vert.attr_NJS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(NJS, layout = lo3, vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -714,7 +714,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, rescale = F, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.15), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig3, which(V(ig3)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -756,7 +756,7 @@ ig4 <- igraph::simplify(ig4)
 ## define layout to display the nodes with their real-world coordinates
 lo4 <- layout.norm(as.matrix(vert.attr_IA1[, c("POINT_X", "POINT_Y")]))
 
-nw_IA1 <- intergraph::asNetwork(ig)
+nw_IA1 <- intergraph::asNetwork(ig4)
 
 
 ## plot network----
@@ -776,38 +776,38 @@ col$color <- c("yellow","darkred", "darkgreen", "orange", "blue")
 vert.attr_IA1$color <- col$color[match(vert.attr_IA1$Datst_1, col$Datst_1)]
 
 ## create and plot igraph with spatial distribution----
-ig <- graph_from_data_frame(edgelist_IA1, directed = FALSE, vertices = vert.attr_IA1)
-ig <- igraph::simplify(ig)
+ig4 <- graph_from_data_frame(edgelist_IA1, directed = FALSE, vertices = vert.attr_IA1)
+ig4 <- igraph::simplify(ig4)
 lo <- layout.norm(as.matrix(vert.attr_IA1[, c("POINT_X", "POINT_Y")]))
 
 ## create plots with different metrics ----
 
 ## plot with color = survey and size = degree centrality 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = degree(ig)/1.5, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig4, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = degree(ig4)/1.5, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 ##asp sets the aspect ratio, i.e. displays the plot in the correct dimensions
 
 ## plot with color = survey and size = betweeness centrality
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = betweenness(ig)*1.2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig4, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = betweenness(ig4)*1.2, vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 ## plot with color = survey and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = log(vert.attr_IA1$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig4, layout = lo, rescale = F, vertex.label = vert.attr_IA1$Site_Nm, vertex.size = log(vert.attr_IA1$Size + 1, 2), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 legend("topright", legend = col$Datst_1, pt.bg = col$color, bty = "n",
        pch = 21, col = "#777777")
 
 # create color map for degree
-d = degree(ig)
+d = degree(ig4)
 cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(unique(d)))
 
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
-plot.igraph(ig, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig))], vertex.label = vert.attr_IA1$Site_Nm, vertex.size = log(vert.attr_IA1$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
+plot.igraph(ig4, layout = lo, rescale = F, vertex.color=cols[as.character(degree(ig4))], vertex.label = vert.attr_IA1$Site_Nm, vertex.size = log(vert.attr_IA1$Size + 1, 1.5), vertex.label.cex = 0.5, vertex.label.color = "black", edge.width = 2, asp = 0.5:1)
 
 # Surveys IA1 ----
 ## LLN survey ----
-THS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "THS"))
+THS <- induced.subgraph(ig4, which(V(ig4)$Datst_1 == "THS"))
 vert.attr_THS <- as.data.frame(vertex_attr(THS))
 lo2 <- layout.norm(as.matrix(vert.attr_THS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(THS, layout = lo2, vertex.label = vertex_attr(THS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -830,7 +830,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(THS, layout = lo2, rescale = F, vertex.color=cols[as.character(degree(THS))], vertex.label = vertex_attr(THS, "Site_Nm"), vertex.size = log(vertex_attr(THS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## NJS survey----
-NJS <- induced.subgraph(ig, which(V(ig)$Datst_1 == "NJS"))
+NJS <- induced.subgraph(ig4, which(V(ig4)$Datst_1 == "NJS"))
 vert.attr_NJS <- as.data.frame(vertex_attr(NJS))
 lo3 <- layout.norm(as.matrix(vert.attr_NJS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(NJS, layout = lo3, vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -853,7 +853,7 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 plot.igraph(NJS, layout = lo3, rescale = F, vertex.color=cols[as.character(degree(NJS))], vertex.label = vertex_attr(NJS, "Site_Nm"), vertex.size = log(vertex_attr(NJS, "Size") + 1, 1.15), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
 ## TBS survey----
-TBS <- induced.subgraph(TBS, which(V(TBS)$Datst_1 == "TBS"))
+TBS <- induced.subgraph(ig4, which(V(ig4)$Datst_1 == "TBS"))
 vert.attr_TBS <- as.data.frame(vertex_attr(TBS))
 lo4 <- layout.norm(as.matrix(vert.attr_TBS[, c("POINT_X", "POINT_Y")]))
 plot.igraph(TBS, layout = lo4, vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2, size = 0.5)
@@ -875,9 +875,10 @@ cols = setNames(colorRampPalette(c("yellow", "red"))(length(unique(d))), sort(un
 ## plot with color = degree and size = logarithmic size (with +1 to avoid negatives and base 2 to scale) 
 plot.igraph(TBS, rescale = F, layout = lo4, vertex.color=cols[as.character(degree(TBS))], vertex.label = vertex_attr(TBS, "Site_Nm"), vertex.size = log(vertex_attr(TBS, "Size") + 1, 1.1), vertex.label.cex = 0.7, vertex.label.color = "black", edge.width = 2)
 
+
 # Descriptives ----
 # The following code can be used to explore descriptive network metrics. 
-# Please note that “ig” changes every time a new period graph is created, so the metrics should be calculated after creating the graph of interest. 
+# Please note that “ig” changes every time a new period graph is created, so "ig" needs to be changed to "ig1", "ig2" etc. for the respective periods. 
 
 ## degree metrics
 deg <- degree(ig)
@@ -897,3 +898,29 @@ mean(harmonic_centrality(ig, normalized = T, mode = "all"))
 edge_density(ig, loops=F)
 length(cluster_edge_betweenness(ig)) # number of communities
 
+# Figure 3 ----
+# The following code was used to create figure 3 in the manuscript.
+
+png('hybrid_graphs_coloured_surveys.png', width = 20, height = 20, units = 'in', res=300)
+#dev.new(width = 30, height = 30, unit = "cm")
+layout(matrix(c(1,2,3,4,5,6), 3, 2, byrow = TRUE)) # figure 1 in row 1, figure 2 and 3 in row 2
+
+plot.igraph(ig, layout = lo, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_EBA1$color, asp = 0.5:1)
+title("Early Bronze Age 1", cex.main=5)
+plot.igraph(ig1, layout = lo1, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_EBA2$color, asp = 0.5:1)
+title("Early Bronze Age 2", cex.main = 5)
+plot.igraph(ig2, layout = lo2, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_MBA$color, asp = 0.5:1)
+title("Middle Bronze Age", cex.main=5)
+plot.igraph(ig3, layout = lo3, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_LBA$color, asp = 0.5:1)
+title("Late Bronze Age", cex.main=5)
+plot.igraph(ig4, layout = lo4, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_IA1$color, asp = 0.5:1)
+title("Iron Age 1", cex.main=5)
+plot.igraph(ig5, layout = lo5, rescale = F, vertex.label = NA, vertex.size = 2, edge.color = "grey39", edge.width = 3, vertex.color = vert.attr_IA2$color, asp = 0.5:1)
+title("Iron Age 2", cex.main=5)
+
+par(fig = c(0, 1, 0, 1), oma = c(0, 0, 0, 0), mar = c(0, 0, 0, 0), new = TRUE)
+plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
+#legend('bottom',legend = c("Tell Beydar Survey", "Leilan Regional Survey", "Tell Hammoukar Survey", "North Jazira Survey", "Additional sites"), col = c("#FD8D3C","#FFFFB2", "#F03B20", "#FECC5C", "#BD0026"), lwd = 5, xpd = TRUE, horiz = TRUE, cex = 2.5)
+legend('bottom',legend = c("Tell Beydar Survey", "Leilan Regional Survey", "Tell Hammoukar Survey", "North Jazira Survey", "Additional sites"), col = c("darkgreen","yellow", "orange", "darkred", "blue"), lwd = 5, xpd = TRUE, horiz = TRUE, cex = 2.5)
+
+dev.off()
