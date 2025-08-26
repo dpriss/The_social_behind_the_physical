@@ -13,19 +13,39 @@ library(tidygraph)
 library(intergraph)
 library(purrr)
 library(texreg)
+library(Rglpk)
+
+#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+#get path of current location from https://stackoverflow.com/questions/47044068/get-the-path-of-current-script
+#stub <- function() {}
+#thisPath <- function() {
+#  cmdArgs <- commandArgs(trailingOnly = FALSE)
+#  if (length(grep("^-f$", cmdArgs)) > 0) {
+#    # R console option
+#    normalizePath(dirname(cmdArgs[grep("^-f", cmdArgs) + 1]))[1]
+#  } else if (length(grep("^--file=", cmdArgs)) > 0) {
+#    # Rscript/R console option
+#    scriptPath <- normalizePath(dirname(sub("^--file=", "", cmdArgs[grep("^--file=", cmdArgs)])))[1]
+#  } else if (Sys.getenv("RSTUDIO") == "1") {
+#    # RStudio
+#    dirname(rstudioapi::getSourceEditorContext()$path)
+#  } else if (is.null(attr(stub, "srcref")) == FALSE) {
+#    # 'source'd via R console
+#    dirname(normalizePath(attr(attr(stub, "srcref"), "srcfile")$filename))
+#  } else {
+#    stop("Cannot find file path")
+#  }
+#}
+
+#currentPath <- thisPath ()
+
+#setwd (currentPath)
 
 #function to remove the X from the column names of imported .csv files
 destroyX = function(es) {
-  f = es
-  for (col in c(1:ncol(f))) {
-    #for each column in dataframe
-    if (startsWith(colnames(f)[col], "X") == TRUE)  {
-      #if starts with 'X' ..
-      colnames(f)[col] <-
-        substr(colnames(f)[col], 2, 100) #get rid of it
-    }
-  }
-  assign(deparse(substitute(es)), f, inherits = TRUE) #assign corrected data to original name
+  names(es) <- gsub ("^X", "", names(es))
+  return (es)
 }
 
 #Data import----
@@ -55,13 +75,13 @@ names(edgelists) <- list("EBA1", "EBA2", "MBA", "LBA", "IA1", "IA2")
 
 #ATTRIBUTES
 # find the attribute files for the periods
-all_attr <- list.files(pattern = "Data/sites_\\w+_hybrid.csv", full.names = TRUE)
+all_attr <- list.files(path = "Data", pattern = "^sites_[a-zA-Z0-9]+_hybrid\\.csv$", full.names = F)
 
 # read csv into list 
-list_all_attr <- lapply(all_attr, read.csv)
+list_all_attr <- lapply(file.path("Data", all_attr), read.csv)
 
 # set the names of the files 
-names(list_all_attr) <- gsub(".csv", "", gsub("_hybrid", "", list.files(pattern = "Data/sites_\\w+_hybrid.csv", full.names = F)))
+names(list_all_attr) <- gsub(".csv", "", gsub("_hybrid", "", list.files(path = "Data", pattern = "^sites_[a-zA-Z0-9]+_hybrid\\.csv$", full.names = F)))
 
 # create new ID column to match the edgelists
 list_all_attr <- 
@@ -92,7 +112,7 @@ for (elist in edgelists) {
   # simplify igraph
   ig <- igraph::simplify(ig)
   # define layout to display the nodes with their real-world coordinates
-  lo <- layout.norm(as.matrix(vert.attr[, c("POINT_X", "POINT_Y")]))
+  lo <- norm_coords(as.matrix(vert.attr[, c("POINT_X", "POINT_Y")]))
 
   # create network
   nw <- intergraph::asNetwork(ig)
@@ -118,13 +138,13 @@ list_nw <- list(nw_EBA1, nw_EBA2, nw_MBA, nw_LBA, nw_IA1, nw_IA2)
 
 #DISTANCE MATRICES
 # period-specific distance matrices, i.e. subset to the nodes in the respective period. Used for ERGMs because a distance matrix for all nodes would lead to wrong assignments of distances.
-DistMats_periods <- list.files(pattern = "Data/\\w+_DistMat_hybrid.csv$", full.names = TRUE)
+DistMats_periods <- list.files(path = "Data", pattern = "^[a-zA-Z0-9]+_DistMat_hybrid\\.csv$", full.names = F)
 # create list of csv
-list_DistMats <- lapply(DistMats_periods, read.csv, row.names = 1)
+list_DistMats <- lapply(file.path("Data", DistMats_periods), read.csv, row.names = 1)
 # row and column names are imported with an X because they are numbers. This function removes them.
 list_DistMats <- lapply(list_DistMats, destroyX)
 # add names to the csvs
-names(list_DistMats) <- gsub("_hybrid.csv", "", list.files(pattern = "Data/\\w+_DistMat_hybrid.csv$", full.names = F))
+names(list_DistMats) <- gsub("_hybrid.csv", "", list.files(path = "Data", pattern = "\\w+_DistMat_hybrid.csv$", full.names = F))
 # add to environment as matrices
 list2env(lapply(list_DistMats, as.matrix),envir = .GlobalEnv)
 
@@ -200,3 +220,4 @@ dev.off()
 
 texreg(list(ergm_multi.EBA1, ergm_multi.EBA2, ergm_multi.MBA, ergm_multi.LBA, ergm_multi.IA1, ergm_multi.IA2), digits = 6, file = "Multi_ERGM_hybrid_all.txt")
 wordreg(list(ergm_multi.EBA1, ergm_multi.EBA2, ergm_multi.MBA, ergm_multi.LBA, ergm_multi.IA1, ergm_multi.IA2), digits = 6, file = "Multi_ERGM_hybrid_all.doc")
+
