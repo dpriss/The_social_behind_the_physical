@@ -1,6 +1,8 @@
 # Introduction 
 This repository contains the data and scripts used for the analysis presented in the paper Priß, D., Prell, C., Lawrence, D., Wainwright, J., Turnbull, L. "The social behind the physical - Assessing tie formation processes of ancient route systems", published in the Journal of Archaeological Science. 
 
+Analysing and understanding connectivity of human social networks of (ancient) societies offers new perspectives on their functioning. However, social network approaches in archaeology rarely utilise formal statistical models to test established theories or develop new hypotheses. In this paper, we present the implementation of MCMC-MLE Temporal Exponential Random Graph Models (MTERGMs) to investigate the hollow way network between settlements of the Bronze and Iron Age Khabur Valley, Mesopotamia. Using MTERGMs, we evaluate eight hypotheses to assess which network patterns explain the formation of the hollow ways. Our results show that in the cross-sectional networks, preferential attachment, transitivity, distance and site size are important factors for tie formation while the longitudinal analysis reveals tie persistence over time with distance and transitivity being significant for tie formation. We reflect on these findings as well as the limitations of our dataset and conclude that TERGMs are useful tools to formally evaluate archaeological theories pertaining to network structures and processes, if the available data are sufficiently complete.  
+
 # Content
 The repository contains one folder with Data, one with Plots and one with Scripts. 
   
