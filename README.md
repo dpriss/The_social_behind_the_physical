@@ -6,48 +6,65 @@ Analysing and understanding connectivity of human social networks of (ancient) s
 # Content
 The repository contains one folder with Data, one with Plots and one with Scripts. 
   
-  * Plots: Plots of network graphs and gof grpahs created in the script "3. MTERGM_hybrid.R"
+  * Plots: Plots of network graphs and goodness-of-fit (gof) graphs created in the script "3. MTERGM_hybrid.R"
   
   * Data & Scripts:
     + Input data for the scripts
-    + 1.DNA.R - Script for a descriptive network analysis of the networks. This scirpt is meant to help the reader get accustomed with the data.
+    + 1.DNA.R - Script for a descriptive network analysis of the networks. This script is meant to help the reader get accustomed with the data.
     + 2.ERGM_periods_hybrid.R - Script to implement ERGMs for the individual time periods (waves) analysed in the paper.
-    + 3.MTERGM_hybrid.R - Script to implement the MTERGM. 
+    + 3.MTERGM_hybrid.R - Script to implement the MTERGM.  
 
 # Software
 For the Scripts, the following software was used:
     
-    R version 4.1.0 (2021-05-18)
-    Platform: x86_64-w64-mingw32/x64 (64-bit)
-    Running under: Windows 10 x64 (build 19045)
+    R version 4.5.1 (2025-06-13 ucrt)
+	Platform: x86_64-w64-mingw32/x64
+	Running under: Windows 11 x64 (build 26100)
 
-    Matrix products: default
- 
-    locale:
-    [1] LC_COLLATE=German_Germany.1252  LC_CTYPE=German_Germany.1252    LC_MONETARY=German_Germany.1252 LC_NUMERIC=C                   
-    [5] LC_TIME=German_Germany.1252    
+	Matrix products: default
+  	LAPACK version 3.12.1
 
-    attached base packages:
-    [1] stats     graphics  grDevices utils     datasets  methods   base     
+	locale:
+	[1] LC_COLLATE=English_United Kingdom.utf8  LC_CTYPE=English_United Kingdom.utf8    LC_MONETARY=English_United Kingdom.utf8
+	[4] LC_NUMERIC=C                            LC_TIME=English_United Kingdom.utf8    
 
-    other attached packages:
-    [1] network_1.18.0    xts_0.12.2        zoo_1.8-11        purrr_0.3.4       R.utils_2.12.2    R.oo_1.25.0       R.methodsS3_1.8.2 sf_1.0-7         
-    [9] dplyr_1.0.9       igraph_1.3.5     
+	time zone: Europe/London
+	tzcode source: internal
 
-    loaded via a namespace (and not attached):
-    [1] Rcpp_1.0.10          pillar_1.9.0         compiler_4.1.0       class_7.3-19         tools_4.1.0          lifecycle_1.0.3      tibble_3.1.7        
-    [8] lattice_0.20-44      pkgconfig_2.0.3      rlang_1.0.6          DBI_1.1.3            cli_3.4.1            rstudioapi_0.14      coda_0.19-4         
-    [15] e1071_1.7-13         generics_0.1.3       vctrs_0.5.2          classInt_0.4-7       grid_4.1.0           tidyselect_1.2.0     glue_1.6.2          
-    [22] R6_2.5.1             fansi_1.0.3          magrittr_2.0.3       ellipsis_0.3.2       units_0.8-0          assertthat_0.2.1     utf8_1.2.2          
-    [29] KernSmooth_2.23-20   proxy_0.4-27         statnet.common_4.7.0
+	attached base packages:
+	[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+	other attached packages:
+ 	[1] openxlsx_4.2.8     viridis_0.6.5      viridisLite_0.4.2  cowplot_1.2.0      arsenal_3.6.3      ggplot2_3.5.2      RColorBrewer_1.1-3
+ 	[8] readxl_1.4.5       network_1.19.0     xts_0.14.1         zoo_1.8-14         purrr_1.1.0        R.utils_2.13.0     R.oo_1.27.1       
+	[15] R.methodsS3_1.8.2  sf_1.0-21          dplyr_1.1.4        plyr_1.8.9         igraph_2.1.4      
+
+	loaded via a namespace (and not attached):
+ 	[1] generics_0.1.4        class_7.3-23          KernSmooth_2.23-26    stringi_1.8.7         lattice_0.22-7        intergraph_2.0-4     
+ 	[7] digest_0.6.37         magrittr_2.0.3        statnet.common_4.12.0 evaluate_1.0.4        grid_4.5.1            fastmap_1.2.0        
+	[13] cellranger_1.1.0      zip_2.3.3             e1071_1.7-16          DBI_1.2.3             gridExtra_2.3         scales_1.4.0         
+	[19] cli_3.6.5             rlang_1.1.6           units_0.8-7           withr_3.0.2           yaml_2.3.10           tools_4.5.1          
+	[25] coda_0.19-4.1         vctrs_0.6.5           R6_2.6.1              proxy_0.4-27          lifecycle_1.0.4       classInt_0.4-11      
+	[31] pkgconfig_2.0.3       pillar_1.11.0         gtable_0.3.6          glue_1.8.0            Rcpp_1.1.0            xfun_0.52            
+	[37] tibble_3.3.0          tidyselect_1.2.1      rstudioapi_0.17.1     knitr_1.50            farver_2.1.2          htmltools_0.5.8.1    
+	[43] rmarkdown_2.29        compiler_4.5.1
+
 
 # How to use 
 
-We advise to work throught the script 1.DNA.R first as it provides the code for an exploratory analysis. We first import the data files which can found in the Data & Scripts folder before creating some plots of the networks with different metrics such as degree and site size to compare and visuslise them. The basic plots of the networks are presented in Figure 3 while the other plots just serve as a means of orientation. We then proceed by calculating selected network metrics. Those metrics are not mentioned in the paper but instead should just help the reader to understand the networks.  
+We advise working through the script 1.DNA.R first as it provides the code for an exploratory analysis. We first import the data files which can be found in the Data & Scripts folder before creating some plots of the networks with different metrics such as degree and site size to compare and visualise them. The basic plots of the networks are presented in Figure 3 while the other plots just serve as a means of orientation. We then proceed by calculating selected network metrics. Those metrics are not mentioned in the paper but instead should just help the reader to understand the networks.  
 
-The other two scripts can be run in any order, depending on the reader's preferences. The script 2.ERGM_periods_hybrid.R contains the code for the ERGMs for the cross-sectional networks, i.e. for the six periods. Every network is analysed independently. We present the results of the models and the gof plots in the SI of the paper (Table 1 and Figure 5 - 10) because those models are just additional information for the interested reader and are not explained in detail in the paper itself. They were added on a reviewer's request and we think that they supplement the paper very well.
+The other two scripts can be run in any order, depending on the reader's preferences. The script 2.ERGM_periods_hybrid.R contains the code for the ERGMs for the cross-sectional networks, i.e. for the six time periods analysed in the paper. Every network is analysed independently. We present the results of the models and the gof plots in the SI of the paper (Table 1 and Figure 5 - 10) because those models are just additional information for the interested reader and are not explained in detail in the paper itself. They were added on a reviewer's request and we think that they supplement the paper very well.
 
-Script 3.MTERGM_hybrid.R contains the main analysis presented in the paper, i.e. the MTERMG. We first provide the simple models with and without temporal dependencies, i.e. the models that just include the hypotheses mentioned in the paper. We then present the fitted models, i.e. the models that include additonal ERGM terms that improve the gof. The results of the fitted models are given in Table 3 while the gof plots are shown in the SI, Figure 1 - 4. 
+Script 3.MTERGM_hybrid.R contains the main analysis presented in the paper, i.e. the MTERMG. We first provide the simple models with and without temporal dependencies, i.e. the models that just include the hypotheses mentioned in the paper. We then present the fitted models, i.e. the models that include additional ERGM terms that improve the gof. The results of the fitted models are given in Table 3 while the gof plots are shown in the SI, Figure 1 - 4. 
 
-There are two options to run the scrirpts, either dowload them and run them locally or use the provided Dockerfile. Please note that to use the Dockerfile, you will need to set the working directory before building the project (i.e. by typing `cd /path` into the terminal before following the instructions in the Dockerfile). If you run the scripts in your local RStudio. please use `setwd` at the begining of the script to change to the folder that the scripts are in to work properly. We commented this line out because it interfered with the Dockerfile environment. 
+Running script 1.DNA.R after the other two scripts will produce an error (because of conflicts in package function names).  To re-run this script, we recommend restarting the R session to clear the conflicting loaded libraries. 
 
+
+## Running the scripts 
+
+There are two options to run the scripts, either download them and run them locally or use the provided Dockerfile:
+
+If you run the scripts in your local RStudio or R console, please use `setwd` before running the script to change the working directory to the folder that contains the scripts.  We do not recommend using R in command line mode to run the scripts. 
+
+Please note that to use the Dockerfile, you will need to set the current directory before building the project (i.e. by typing `cd /path` into the Docker terminal, where the path is the folder containing the Dockerfile, scripts and data folder) before following the instructions in the Dockerfile. 
