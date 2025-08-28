@@ -31,10 +31,10 @@ RUN  . /etc/environment \
 #
 # Or open up the scripts in turn and run them interactively
 
-### STEP 4 ####
-# Clean and delete containers. Run on the terminal:
-# docker ps -aq | xargs docker stop | xargs docker rm
+ ### STEP 4 ####
+# Use the Docker interface to retrieve output files required from the Container created by clicking Actions, View Files (they will be stored in /home/rstudio/ergm)
+#
+# Once finished, clean and delete containers. Run on the terminal:
+# docker ps -aq | xargs docker rm -f  
 
-# This will generate a folder called output in your home directory containing figures and tables as well as R images containing the results of the case study  and the tactical simulation.
-
-# Please note that the scripts will require about * hours for completion on a desktop machine.
+# If you want to run the scripts again, you can simply return to STEP 2 in the Docker terminal (or rebuild from STEP 1 if the Image has been deleted).
